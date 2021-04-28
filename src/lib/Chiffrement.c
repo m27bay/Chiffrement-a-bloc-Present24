@@ -83,24 +83,35 @@ u32 chiffrementSubstitution(const u32 etat) {
   u32 masque = 0xf0000000;
   for(size_t i = 0; i < 6; ++i) {
     sousEtat = (etat & masque);
-    printf("sousEtat : %x\n", sousEtat); afficheBinU8(sousEtat); printf("\n");
+    // printf("sousEtat : %x\n", sousEtat); afficheBinU8(sousEtat); printf("\n");
     nouvEtat |= sousEtat;
-    printf("nouvEtat : %x\n", nouvEtat); afficheBinU32(nouvEtat); printf("\n");
+    // printf("nouvEtat : %x\n", nouvEtat); afficheBinU32(nouvEtat); printf("\n");
     nouvEtat <<= 4;
-    printf("nouvEtat : %x\n", nouvEtat); afficheBinU32(nouvEtat); printf("\n");
+    // printf("nouvEtat : %x\n", nouvEtat); afficheBinU32(nouvEtat); printf("\n");
     masque >>= 4;
   }
 
-  printf("nouvEtat : %x\n", nouvEtat); afficheBinU32(nouvEtat); printf("\n");
+  // printf("nouvEtat : %x\n", nouvEtat); afficheBinU32(nouvEtat); printf("\n");
   return nouvEtat;
 }
 
 u32 chiffrementPermutation(const u32 etat) {
-  u32 nouvEtat;
-  for(size_t i = 0; i < 24; ++i) {
-    
+  u32 nouvEtat = 0;
+  u32 x, y;
+  u32 masque = 1;
+  for(u8 i = 0; i < 24; ++i) {
+    x = (etat >> i) & masque;
+    y = (etat >> tabPermutation[i]) & masque;
+
+    if((x == 1) && (y == 0)) {
+        nouvEtat |= masque << y; 
+    }
+    else if((x == 0) && (y == 1)) {
+      nouvEtat &= masque << y;
+    }
   }
 
+  // printf("nouvEtat : %x\n", nouvEtat); afficheBinU32(nouvEtat); printf("\n");
   return nouvEtat;
 }
 
@@ -111,13 +122,11 @@ u32 chiffrementPermutation(const u32 etat) {
  * */
 u32 fctDeChiffrement(u32 m, u32 ki[nbrSousCle]) {
   u32 etat = m, chiffre;
-  printf("etat : %x\n", etat);
   for(u8 i = 1; i < 11; ++i) {
-    printf("Etape n°%d\n", i);
     etat ^= ki[i];
-    printf("etat : %x\n", etat);
     etat = chiffrementSubstitution(etat);
-    printf("\n\n");
+    etat = chiffrementPermutation(etat);
+    printf("etat : %x\n", etat); afficheBinU32(etat); printf("\n");
   }
 
   etat ^= ki[nbrSousCle-1];
