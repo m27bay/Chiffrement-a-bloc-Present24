@@ -133,7 +133,7 @@ u8 testSousCle(const u32 ki[nbrSousCle]) {
 
 	for(size_t i = 0; i < nbrSousCle; ++i) {
 		if( reponse[i] != ki[i] ) { 
-			printf("ERREUR SOUS CLE N°%ld : attendue %x, obtenue %x\n", i+1, reponse[i], ki[1]);
+			// printf("ECHEC SOUS CLE N°%ld : attendue %x, obtenue %x\n", i+1, reponse[i], ki[1]);
 			return 0;
 		}
 	}
