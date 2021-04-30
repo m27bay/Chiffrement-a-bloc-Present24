@@ -84,9 +84,9 @@ void afficheBinU80(const u80_t n) {
   }
 }
 
-void afficherSousCLe(const u32 ki[nbrSousCle]) {
+void afficherSousCLe(const u32 sousCle[nbrSousCle]) {
 	for(size_t i = 0; i < nbrSousCle; ++i) {
-		printf("Sous cle n°%ld :", i+1); afficheBinU32(ki[i]); printf(" <=> %2.2x\n", ki[i]);
+		printf("Sous cle n°%ld :", i+1); afficheBinU32(sousCle[i]); printf(" <=> %06x\n", sousCle[i]);
 	}
 }
 
@@ -101,14 +101,14 @@ void initU80(u80_t* n) {
 }
 
 /**
- * Description : Copie la variable cleMaitre dans la variable k en
+ * Description : Copie la variable cleMaitre dans la variable registreK en
  * 								commencant par le poids fort.
- * Entree : Un pointeur sur la variable k, pour le remplir
- * 					la variable cleMaitre, que l'on doit copier dans k.
+ * Entree : Un pointeur sur la variable registreK, pour le remplir
+ * 					la variable cleMaitre, que l'on doit copier dans registreK.
  * */
-void copieU32DansU80(u80_t* k, u32 cleMaitre) {
+void copieU32DansU80(u80_t* registreK, u32 cleMaitre) {
   for(size_t i = 2; cleMaitre != 0; --i) {
-    k->tab[i] = cleMaitre & 0xffffff;
+    registreK->tab[i] = cleMaitre & 0xffffff;
     cleMaitre >>= 8;
   }
 }
@@ -122,14 +122,6 @@ void copieU80DansU80(u80_t* copie, const u80_t original) {
 	for(size_t i = 0; i < 10; ++i) {
 		copie->tab[i] = original.tab[i];
 	}
-}
-
-void inverserBit(u32* bin, const u8 posDepart, const u8 posArrivee) {
-	if(posDepart > 31 || posArrivee > 31) {
-		printf("ERREUR : Postion en dehors des limites.");
-		return;
-	}
-
 }
 
 u8 testSousCle(const u32 ki[nbrSousCle]) {

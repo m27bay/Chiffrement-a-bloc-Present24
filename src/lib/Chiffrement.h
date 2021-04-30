@@ -3,7 +3,10 @@
 
 #include "MyInclude.h"
 
-void cadencementDeCle(u32[nbrSousCle], u32);
-u32 fctDeChiffrement(u32, u32[nbrSousCle]);
+void cadencementDeCle(u32 sousCle[nbrSousCle], const u32 cleMaitre);
+u32 fctDeChiffrement(u32 mClaire, u32 sousCle[nbrSousCle]);
+
+void testChiffrementSubstitution(u32 etat);
+void testChiffrementPermutation(const u32 etat);
 
 #endif
