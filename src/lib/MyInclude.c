@@ -2,7 +2,7 @@
 
 /**
  * Description : Affiche la variable n en bit du poids faible au poids fort.
- * Entree : La variable n sur 8 bits.
+ * Entree : La variable sur 8 bits : n.
  * */
 void afficheBinU8v2(const u8 n) {
 	u8 bit = 0;
@@ -18,7 +18,7 @@ void afficheBinU8v2(const u8 n) {
 
 /**
  * Description : Affiche la variable n en bit du poids fort au poids faible.
- * Entree : La variable n sur 8 bits.
+ * Entree : La variable sur 8 bits : n.
  * */
 void afficheBinU8(const u8 n) {
 	u8 bit = 0;
@@ -34,7 +34,7 @@ void afficheBinU8(const u8 n) {
 
 /**
  * Description : Affiche la variable n en bit du poids faible au poids fort.
- * Entree : La variable n sur 32 bits.
+ * Entree : La variable sur 32 bits : n.
  * */
 void afficheBinU32v2(const u32 n) {
 	u32 bit = 0;
@@ -50,7 +50,7 @@ void afficheBinU32v2(const u32 n) {
 
 /**
  * Description : Affiche la variable n en bit du poids fort au poids faible.
- * Entree : La variable n sur 32 bits.
+ * Entree : La variable sur 32 bits : n.
  * */
 void afficheBinU32(const u32 n) {
 	u32 bit = 0;
@@ -66,7 +66,7 @@ void afficheBinU32(const u32 n) {
 
 /**
  * Description : Affiche la variable n en bit de poids faible au poids fort.
- * Entree : La variable n sur 80 bits.
+ * Entree : La variable sur 80 bits : n.
  * */
 void afficheBinU80v2(const u80_t n) {
   for(size_t j = 0; j < 10; ++j) {
@@ -76,7 +76,7 @@ void afficheBinU80v2(const u80_t n) {
 
 /**
  * Description : Affiche la variable n en bit de poids fort au poids faible.
- * Entree : La variable n sur 80 bits.
+ * Entree : La variable sur 80 bits : n.
  * */
 void afficheBinU80(const u80_t n) {
   for(size_t j = 0; j < 10; ++j) {
@@ -92,7 +92,7 @@ void afficherSousCLe(const u32 sousCle[nbrSousCle]) {
 
 /**
  * Description : Initialise la variable n à 0.
- * Entree : Un pointeur sur la variable n de 80 bits.
+ * Entree : Un pointeur sur la variable de 80 bits : n.
  * */
 void initU80(u80_t* n) {
   for(size_t i = 0; i < 10; ++i) {
@@ -103,8 +103,8 @@ void initU80(u80_t* n) {
 /**
  * Description : Copie la variable cleMaitre dans la variable registreK en
  * 								commencant par le poids fort.
- * Entree : Un pointeur sur la variable registreK, pour le remplir
- * 					la variable cleMaitre, que l'on doit copier dans registreK.
+ * Entree : Un pointeur sur la variable : registreK pour le remplir.
+ * 					La cle maitre : cleMaitre : que l'on doit copier dans registreK.
  * */
 void copieU32DansU80(u80_t* registreK, u32 cleMaitre) {
   for(size_t i = 2; cleMaitre != 0; --i) {
@@ -114,9 +114,9 @@ void copieU32DansU80(u80_t* registreK, u32 cleMaitre) {
 }
 
 /**
- * Description : Copie les champs de d'une varaible à l'autre..
- * Entree : Un pointeur sur la variable copie, pour le remplir
- * 					la variable original, que l'on va copier.
+ * Description : Copie les champs de d'une varaible à l'autre.
+ * Entree : Un pointeur sur la variable copie, pour le remplir.
+ * 					La variable original, que l'on va copier.
  * */
 void copieU80DansU80(u80_t* copie, const u80_t original) {
 	for(size_t i = 0; i < 10; ++i) {
@@ -124,6 +124,10 @@ void copieU80DansU80(u80_t* copie, const u80_t original) {
 	}
 }
 
+/**
+ * Description : 
+ * Entree : .
+ * */
 u8 testSousCle(const u32 ki[nbrSousCle]) {
 	u32 reponse[nbrSousCle] = {
 		0x000000, 0x000000, 0x000001, 0x000001, 

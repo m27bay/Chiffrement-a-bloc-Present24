@@ -1,58 +1,58 @@
 #include "../lib/Chiffrement.h"
 
 /**
- * mClaire = 0x000000
+ * mClair = 0x000000
  * cleMaitre = 0x000000
  * mChiffre = 0xbb57e6
  * */
 u8 test1() {
-  u32 mClaire = 0x000000;
+  u32 mClair = 0x000000;
   u32 cleMaitre = 0x000000;
   u32 sousCLe[11];
   cadencementDeCle(sousCLe, cleMaitre);
-  u32 mChiffre = fctDeChiffrement(mClaire, sousCLe);
+  u32 mChiffre = fctDeChiffrement(mClair, sousCLe);
   return (mChiffre == 0xbb57e6);
 }
 
 /**
- * mClaire = 0xffffff
+ * mClair = 0xffffff
  * cleMaitre = 0x000000
  * mChiffre = 0x739293
  * */
 u8 test2() {
-  u32 mClaire = 0xffffff;
+  u32 mClair = 0xffffff;
   u32 cleMaitre = 0x000000;
   u32 sousCLe[11];
   cadencementDeCle(sousCLe, cleMaitre);
-  u32 mChiffre = fctDeChiffrement(mClaire, sousCLe);
+  u32 mChiffre = fctDeChiffrement(mClair, sousCLe);
   return (mChiffre == 0x739293);
 }
 
 /**
- * mClaire = 0x000000
+ * mClair = 0x000000
  * cleMaitre = 0xffffff
  * mChiffre = 0x1b56ce
  * */
 u8 test3() {
-  u32 mClaire = 0x000000;
+  u32 mClair = 0x000000;
   u32 cleMaitre = 0xffffff;
   u32 sousCLe[11];
   cadencementDeCle(sousCLe, cleMaitre);
-  u32 mChiffre = fctDeChiffrement(mClaire, sousCLe);
+  u32 mChiffre = fctDeChiffrement(mClair, sousCLe);
   return (mChiffre == 0x1b56ce);
 }
 
 /**
  * cleMaitre = 0xf955b9
- * mClaire = 0xd1bd2d
+ * mClair = 0xd1bd2d
  * mChiffre = 0x47a929
  * */
 u8 test4() {
-  u32 mClaire = 0xf955b9;
+  u32 mClair = 0xf955b9;
   u32 cleMaitre = 0xd1bd2d;
   u32 sousCLe[11];
   cadencementDeCle(sousCLe, cleMaitre);
-  u32 mChiffre = fctDeChiffrement(mClaire, sousCLe);
+  u32 mChiffre = fctDeChiffrement(mClair, sousCLe);
   return (mChiffre == 0x47a929);
 }
 
