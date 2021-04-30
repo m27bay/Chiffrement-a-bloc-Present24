@@ -59,9 +59,9 @@ void cadencementXor(u80_t *registreK, const u8 i) {
 }
 
 /**
- * Description : Rempli le tableau de sous cle ki en fonction de la cle maitre.
+ * Description : Rempli le tableau de sous cle sousCle en fonction de la cle maitre.
  * Entree : La cle maitre : cleMaitre
- *          Le tableau de sous cles : ki.
+ *          Le tableau de sous cles : sousCle.
  * */
 void cadencementDeCle(u32 sousCle[nbrSousCle], const u32 cleMaitre) {
   // Copie cle maitre dans le 24 bits de poids fort
@@ -80,17 +80,13 @@ void cadencementDeCle(u32 sousCle[nbrSousCle], const u32 cleMaitre) {
 u32 chiffrementSubstitution(u32 etat) {
   u32 nouvEtat = 0;
   u8 sousEtat;
-  // printf("etat : %x,", etat); afficheBinU32(etat); printf("\n");
 
   for(size_t i = 0; i < 6; ++i) {
     sousEtat = (etat & 0xf);
-    // printf("\nsousEtat : %x,", sousEtat); afficheBinU8(sousEtat); printf("\n");
     nouvEtat |= (tabSubstitution[sousEtat] << (4 * i));
-    // printf("nouvEtat : %x,", nouvEtat); afficheBinU32(nouvEtat); printf("\n");
     etat >>= 4;
   }
 
-  // printf("nouvEtat : %x", nouvEtat); afficheBinU32(nouvEtat); printf("\n");
   return nouvEtat;
 }
 
@@ -99,20 +95,15 @@ void testChiffrementSubstitution(u32 etat) {
 }
 
 u32 chiffrementPermutation(const u32 etat) {
-  // printf("etat : %x,", etat); afficheBinU32(etat); printf("\n");
   u32 nouvEtat = 0;
   u32 bitEtat, bitNouvEtat;
   u32 masque = 1;
   for(u8 i = 0; i < 24; ++i) {
     bitEtat = (etat >> i) & masque;
-    // printf("\netape n°%d, bitEtat : %x,", i, bitEtat); afficheBinU32(bitEtat); printf("\n");
     bitNouvEtat = (bitEtat << (tabPermutation[i])); 
-    // printf("bitNouvEtat : %x,", bitNouvEtat); afficheBinU32(bitNouvEtat); printf("\n");
     nouvEtat |= bitNouvEtat;
-    // printf("nouvEtat : %x,", nouvEtat); afficheBinU32(nouvEtat); printf("\n");
   }
 
-  // printf("nouvEtat : %x,", nouvEtat); afficheBinU32(nouvEtat); printf("\n");
   return nouvEtat;
 }
 
