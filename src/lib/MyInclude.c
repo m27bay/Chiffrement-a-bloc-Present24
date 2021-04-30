@@ -86,7 +86,7 @@ void afficheBinU80(const u80_t n) {
 
 void afficherSousCLe(const u32 ki[nbrSousCle]) {
 	for(size_t i = 0; i < nbrSousCle; ++i) {
-		printf("Sous cle n°%ld : ", i+1); afficheBinU32(ki[i]); printf(" <=> %2.2x\n", ki[i]);
+		printf("Sous cle n°%ld :", i+1); afficheBinU32(ki[i]); printf(" <=> %2.2x\n", ki[i]);
 	}
 }
 
