@@ -1,3 +1,5 @@
+#pragma once
+
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -6,12 +8,15 @@
 #define nbrSousCle 11
 
 typedef unsigned char u8;
-typedef char i8;
 typedef unsigned int u32;
+typedef int i32;
 
 typedef struct u80_s {
   u8 tab[10];
 } u80_t;
+
+u8 tabSubstitution[16];
+u8 tabPermutation[24];
 
 void afficheBinU8v2(const u8 n);
 void afficheBinU32v2(const u32 n);

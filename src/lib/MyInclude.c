@@ -1,7 +1,24 @@
 #include "MyInclude.h"
 
 /**
- * Description : Affiche la variable n en bit du poids faible au poids fort.
+ * Tableaux globaux utilisé pour faire des subtitutions
+ * et des permutations de bits.
+ * 
+ * tabSubstitution : Associe une valeur sur 4 bits à une autre valeur
+ *                    sur 4 bits.
+ * 
+ * tabPermutation : Associe la position d'un bit à une autre position.
+ * */
+u8 tabSubstitution[16] = {12, 5, 6, 11, 9, 0, 10, 13,
+													3, 14, 15, 8, 4, 7, 1, 2};
+
+u8 tabPermutation[24] = {0, 6, 12, 18, 1, 7, 13, 19,
+												2, 8, 14, 20, 3, 9, 15, 21, 4,
+												10, 16, 22, 5, 11, 17, 23};
+
+/**
+ * Description : Affiche la variable n en bit du poids
+ * 								faible au poids fort.
  * Entree : La variable sur 8 bits : n.
  * */
 void afficheBinU8v2(const u8 n) {
@@ -17,7 +34,8 @@ void afficheBinU8v2(const u8 n) {
 }
 
 /**
- * Description : Affiche la variable n en bit du poids fort au poids faible.
+ * Description : Affiche la variable n en bit du poids
+* 								fort au poids faible.
  * Entree : La variable sur 8 bits : n.
  * */
 void afficheBinU8(const u8 n) {
@@ -33,7 +51,8 @@ void afficheBinU8(const u8 n) {
 }
 
 /**
- * Description : Affiche la variable n en bit du poids faible au poids fort.
+ * Description : Affiche la variable n en bit du poids
+ * 								faible au poids fort.
  * Entree : La variable sur 32 bits : n.
  * */
 void afficheBinU32v2(const u32 n) {
@@ -49,7 +68,8 @@ void afficheBinU32v2(const u32 n) {
 }
 
 /**
- * Description : Affiche la variable n en bit du poids fort au poids faible.
+ * Description : Affiche la variable n en bit du poids
+ * 								fort au poids faible.
  * Entree : La variable sur 32 bits : n.
  * */
 void afficheBinU32(const u32 n) {
@@ -65,7 +85,8 @@ void afficheBinU32(const u32 n) {
 }
 
 /**
- * Description : Affiche la variable n en bit de poids faible au poids fort.
+ * Description : Affiche la variable n en bit de poids
+ * 								faible au poids fort.
  * Entree : La variable sur 80 bits : n.
  * */
 void afficheBinU80v2(const u80_t n) {
@@ -75,7 +96,8 @@ void afficheBinU80v2(const u80_t n) {
 }
 
 /**
- * Description : Affiche la variable n en bit de poids fort au poids faible.
+ * Description : Affiche la variable n en bit de poids
+ * 								fort au poids faible.
  * Entree : La variable sur 80 bits : n.
  * */
 void afficheBinU80(const u80_t n) {
@@ -84,6 +106,10 @@ void afficheBinU80(const u80_t n) {
   }
 }
 
+/**
+ * Description : Affiche les sous cles contenues dans le tableau.
+ * Entree : La variable sur 80 bits : n.
+ * */
 void afficherSousCLe(const u32 sousCle[nbrSousCle]) {
 	for(size_t i = 0; i < nbrSousCle; ++i) {
 		printf("Sous cle n°%ld :", i+1); afficheBinU32(sousCle[i]); printf(" <=> %06x\n", sousCle[i]);
@@ -101,10 +127,11 @@ void initU80(u80_t* n) {
 }
 
 /**
- * Description : Copie la variable cleMaitre dans la variable registreK en
- * 								commencant par le poids fort.
+ * Description : Copie la variable cleMaitre dans la variable
+ * 								registreK en commencant par le poids fort.
  * Entree : Un pointeur sur la variable : registreK pour le remplir.
- * 					La cle maitre : cleMaitre : que l'on doit copier dans registreK.
+ * 					La cle maitre : cleMaitre : que l'on doit copier
+ * 						dans registreK.
  * */
 void copieU32DansU80(u80_t* registreK, u32 cleMaitre) {
   for(size_t i = 2; cleMaitre != 0; --i) {
@@ -137,10 +164,11 @@ u8 testSousCle(const u32 ki[nbrSousCle]) {
 
 	for(size_t i = 0; i < nbrSousCle; ++i) {
 		if( reponse[i] != ki[i] ) { 
-			// printf("ECHEC SOUS CLE N°%ld : attendue %x, obtenue %x\n", i+1, reponse[i], ki[1]);
+			// printf("ECHEC SOUS CLE N°%ld : attendue %x,
+			// obtenue %x\n", i+1, reponse[i], ki[1]);
 			return 0;
 		}
 	}
 
 	return 1;
-} 
+}

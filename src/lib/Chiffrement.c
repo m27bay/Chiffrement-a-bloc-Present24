@@ -1,18 +1,6 @@
 #include "Chiffrement.h"
 
 /**
- * Tableaux globaux utilisé pour faire des subtitutions
- * et des permutations de bits.
- * 
- * tabSubstitution : Associe une valeur sur 4 bits à une autre valeur
- *                    sur 4 bits.
- * 
- * tabPermutation : Associe la position d'un bit à une autre position.
- * */
-u8 tabSubstitution[16] = {12, 5, 6, 11, 9, 0, 10, 13, 3, 14, 15, 8, 4, 7, 1, 2};
-u8 tabPermutation[24] = {0, 6, 12, 18, 1, 7, 13, 19, 2, 8, 14, 20, 3, 9, 15, 21, 4, 10, 16, 22, 5, 11, 17, 23};
-
-/**
  * Description : Recupere 24 bits de registreK[39] à registreK[16]
  *                pour former la sous cle.
  * Entree : Le registre : un tableau de 10 octects..
@@ -104,6 +92,7 @@ void cadencementDeCle(u32 sousCle[nbrSousCle], const u32 cleMaitre) {
  * Sortie : Le nouveau etat : nouvEtat.
  * */
 u32 chiffrementSubstitution(u32 etat) {
+  // printf("chiffrementSubstitution, etat : %06x\n", etat);
   u32 nouvEtat = 0;
   u8 sousEtat;
 
@@ -113,6 +102,7 @@ u32 chiffrementSubstitution(u32 etat) {
     etat >>= 4;
   }
 
+  // printf("chiffrementSubstitution, nouvEtat : %06x\n", nouvEtat);
   return nouvEtat;
 }
 
@@ -128,10 +118,12 @@ u32 chiffrementPermutation(const u32 etat) {
 
   for(u8 i = 0; i < 24; ++i) {
     bitEtat = (etat >> i) & masque;
-    bitNouvEtat = (bitEtat << (tabPermutation[i])); 
+    bitNouvEtat = (bitEtat << tabPermutation[i]); 
     nouvEtat |= bitNouvEtat;
   }
 
+  // printf("chiffrementPermutation, etat : %06x\n", etat);
+  // printf("chiffrementPermutation, nouvEtat : %06x\n", nouvEtat);
   return nouvEtat;
 }
 
@@ -141,11 +133,11 @@ u32 chiffrementPermutation(const u32 etat) {
  *          Le tableau de sous cles : sousCle.
  * Sortie : Le message chiffre : mChiffre.
  * */
-u32 fctDeChiffrement(u32 mClair, u32 sousCle[nbrSousCle]) {
+u32 fctDeChiffrement(const u32 mClair, const u32 sousCle[nbrSousCle]) {
   printf("Message clair : %06x\n", mClair);
   u32 etat = mClair, mChiffre;
   u8 i;
-  
+
   for(i = 1; i < 11; ++i) {
     printf("Tour %d, Etat : %06x, Sous-clé : %06x\n", i, etat, sousCle[i-1]);
     etat ^= sousCle[i-1];
@@ -153,6 +145,7 @@ u32 fctDeChiffrement(u32 mClair, u32 sousCle[nbrSousCle]) {
     etat = chiffrementPermutation(etat);
   }
 
+  // printf("Etat : %06x\n", etat);
   etat ^= sousCle[nbrSousCle-1];
   printf("Tour %d, Etat : %06x, Sous-clé : %06x\n", i, etat, sousCle[i-1]);
   mChiffre = etat;
