@@ -1,11 +1,11 @@
 #pragma once
 
-#include<stdio.h>
-#include<stdlib.h>
-
-#include<string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
 
 #define nbrSousCle 11
+#define tailleCle 16777216
 
 typedef unsigned char u8;
 typedef unsigned int u32;

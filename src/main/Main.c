@@ -1,5 +1,6 @@
 #include "../lib/Chiffrement.h"
 #include "../lib/Dechiffrement.h"
+#include "../lib/Attaque2Present24.h"
 
 /**
  * Chiffrement : 
@@ -121,6 +122,39 @@ u8 test4b() {
   return (mClair == 0xf955b9);
 }
 
+void testAttaque(u32 mClair, u32 mChiffre,
+                u32 mClair2, u32 mChiffre2)
+{
+  u32* listeClair = malloc( (tailleCle + 2) * sizeof(u32));
+  u32* listeChiffre = malloc( (tailleCle + 2) * sizeof(u32));
+  u32* collision = malloc( (tailleCle + 2) * sizeof(u32));
+
+  creerListeChiffrement(listeClair, mClair);
+  creerListeDechiffrement(listeChiffre, mChiffre);
+  trouverCollisions(collision, listeClair, listeChiffre);
+
+  // u32 listeClair2[tailleCle + 2];
+  // u32 listeChiffre2[tailleCle + 2];
+  // u32 collision2[tailleCle + 2];
+
+  // creerListeChiffrement(listeClair2, mClair2);
+  // creerListeDechiffrement(listeChiffre2, mChiffre2);
+  // trouverCollisions(collision2, listeClair2, listeChiffre2);
+
+  // u8 nombreCollision = 0;
+  // for(size_t i = 0; i <= tailleCle; ++i) {
+  //   if(collision[i] == collision2[i]) {
+  //     nombreCollision++;
+  //   }
+  // }
+
+  // printf("Nombre de collision : %d", nombreCollision);
+
+  free(listeClair);
+  free(listeChiffre);
+  free(collision);
+}
+
 int main(void) {
   printf("Test : %s", (test1a()) ? "Succes\n" : "Echec\n");
   printf("\n");
@@ -137,6 +171,8 @@ int main(void) {
   printf("Test : %s", (test4a()) ? "Succes\n" : "Echec\n");
   printf("\n");
   printf("Test : %s", (test4b()) ? "Succes\n" : "Echec\n");
+
+  testAttaque(0x91c472, 0x60ab71, 0xf18a50, 0x68b9d2);
 
   return 0;
 }
