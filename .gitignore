@@ -1,5 +1,6 @@
 crypto
 .vscode
+brouillon.c
 
 # Prerequisites
 *.d

@@ -3,19 +3,12 @@
 #include "Chiffrement.h"
 #include "Dechiffrement.h"
 #include "MyInclude.h"
+#include "Trier.h"
 
-// Structure contenant les informations nécessaires au thread
-typedef struct {
-	u32* liste;
-	u8 debut;
-	u8 fin;
-} message_t;
+void remplirListe(msgCle_t* liste, u32 tailleListe, u32 message, u8 flag);
 
-void creerListeChiffrement(u32 listeClair[16777216], u32 mClair);
+void trouverCollisions(pairCle_t* collision, msgCle_t* listeClair,
+                      msgCle_t* listeChiffre, u32 tailleListe);
 
-void creerListeDechiffrement(u32 listeChiffre[16777216],
-                        u32 mChiffre);
-
-void trouverCollisions(u32 collision[16777216],
-                    u32 listeClair[16777216],
-                    u32 listeChiffre[16777216]);
+void trouverClesCandidates(pairCle_t* collision, u32 tailleCollision,
+                          u32 mClair2, u32 mChiffre2);

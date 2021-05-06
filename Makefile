@@ -8,7 +8,7 @@ EXEC=crypto
 #################################
 
 ifeq ($(DEBUG), yes)
-	CFLAGS = -Wall -Wextra -g
+	CFLAGS = -Wall -Wextra -g -pthread
 else
 	CFLAGS = -Ofast
 endif
@@ -22,8 +22,8 @@ all: build $(EXEC)
 build:
 	./build.sh
 
-$(EXEC): Main.o Chiffrement.o Dechiffrement.o Attaque2Present24.o MyInclude.o
-	$(CC) target/Main.o target/Chiffrement.o target/Dechiffrement.o target/Attaque2Present24.o target/MyInclude.o -o bin/$@
+$(EXEC): Main.o Chiffrement.o Dechiffrement.o Attaque2Present24.o Trier.o MyInclude.o
+	$(CC) $(CFLAGS) target/Main.o target/Chiffrement.o target/Dechiffrement.o target/Attaque2Present24.o target/Trier.o target/MyInclude.o -o bin/$@
 
 run: 
 	./bin/crypto
@@ -42,6 +42,9 @@ Dechiffrement.o: src/lib/Dechiffrement.c src/lib/Dechiffrement.h
 	$(CC) -c $(CFLAGS) $< -o target/$@
 
 Attaque2Present24.o: src/lib/Attaque2Present24.c src/lib/Attaque2Present24.h
+	$(CC) -c $(CFLAGS) $< -o target/$@
+
+Trier.o: src/lib/Trier.c src/lib/Trier.h
 	$(CC) -c $(CFLAGS) $< -o target/$@
 
 MyInclude.o: src/lib/MyInclude.c src/lib/MyInclude.h

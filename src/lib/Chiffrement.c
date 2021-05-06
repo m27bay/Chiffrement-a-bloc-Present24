@@ -92,7 +92,6 @@ void cadencementDeCle(u32 sousCle[nbrSousCle], const u32 cleMaitre) {
  * Sortie : Le nouveau etat : nouvEtat.
  * */
 u32 chiffrementSubstitution(u32 etat) {
-  // printf("chiffrementSubstitution, etat : %06x\n", etat);
   u32 nouvEtat = 0;
   u8 sousEtat;
 
@@ -102,7 +101,6 @@ u32 chiffrementSubstitution(u32 etat) {
     etat >>= 4;
   }
 
-  // printf("chiffrementSubstitution, nouvEtat : %06x\n", nouvEtat);
   return nouvEtat;
 }
 
@@ -122,8 +120,6 @@ u32 chiffrementPermutation(const u32 etat) {
     nouvEtat |= bitNouvEtat;
   }
 
-  // printf("chiffrementPermutation, etat : %06x\n", etat);
-  // printf("chiffrementPermutation, nouvEtat : %06x\n", nouvEtat);
   return nouvEtat;
 }
 
@@ -134,21 +130,16 @@ u32 chiffrementPermutation(const u32 etat) {
  * Sortie : Le message chiffre : mChiffre.
  * */
 u32 fctDeChiffrement(const u32 mClair, const u32 sousCle[nbrSousCle]) {
-  printf("Message clair : %06x\n", mClair);
   u32 etat = mClair, mChiffre;
   u8 i;
 
   for(i = 1; i < 11; ++i) {
-    printf("Tour %d, Etat : %06x, Sous-clé : %06x\n", i, etat, sousCle[i-1]);
     etat ^= sousCle[i-1];
     etat = chiffrementSubstitution(etat);
     etat = chiffrementPermutation(etat);
   }
 
-  // printf("Etat : %06x\n", etat);
   etat ^= sousCle[nbrSousCle-1];
-  printf("Tour %d, Etat : %06x, Sous-clé : %06x\n", i, etat, sousCle[i-1]);
   mChiffre = etat;
-  printf("Message chiffré : %06x\n", mChiffre);
   return mChiffre;
 }

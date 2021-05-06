@@ -16,6 +16,13 @@ u8 tabPermutation[24] = {0, 6, 12, 18, 1, 7, 13, 19,
 												2, 8, 14, 20, 3, 9, 15, 21, 4,
 												10, 16, 22, 5, 11, 17, 23};
 
+u8 invTabSubstitution[16] = {5, 14, 15, 8, 12, 1, 2, 13,
+														11, 4, 6, 3, 0, 7, 9, 10};
+
+u8 invTabPermutation[24] = {0, 4, 8, 12, 16, 20, 1, 5,
+														9, 13, 17, 21, 2, 6, 10, 14,
+														18, 22, 3, 7, 11, 15, 19, 23};
+
 /**
  * Description : Affiche la variable n en bit du poids
  * 								faible au poids fort.
@@ -152,8 +159,8 @@ void copieU80DansU80(u80_t* copie, const u80_t original) {
 }
 
 /**
- * Description : 
- * Entree : .
+ * Description :
+ * Entree :
  * */
 u8 testSousCle(const u32 ki[nbrSousCle]) {
 	u32 reponse[nbrSousCle] = {
@@ -163,12 +170,17 @@ u8 testSousCle(const u32 ki[nbrSousCle]) {
 	};
 
 	for(size_t i = 0; i < nbrSousCle; ++i) {
-		if( reponse[i] != ki[i] ) { 
-			// printf("ECHEC SOUS CLE N°%ld : attendue %x,
-			// obtenue %x\n", i+1, reponse[i], ki[1]);
+		if( reponse[i] != ki[i] ) {
 			return 0;
 		}
 	}
 
 	return 1;
+}
+
+void initListePairCle(pairCle_t* pairCle, u32 nbrPair) {	
+	for(size_t i = 0; i < nbrPair; ++i) {
+		pairCle[i].cle = -1;
+		pairCle[i].cle2 = -1;
+	}
 }
