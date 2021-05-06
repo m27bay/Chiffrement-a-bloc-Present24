@@ -1,5 +1,11 @@
 #include "Dechiffrement.h"
 
+/**
+ * Description : Applique le tableau de invSubstitution sur une variable
+ *               de 32 bits.
+ * Entree : Une variable de 32 bits.
+ * Sortie : Une variable de 32 bits.
+ * */
 u32 dechiffrementSubstitution(u32 etat) {
   u32 nouvEtat = 0;
   u8 sousEtat;
@@ -13,6 +19,12 @@ u32 dechiffrementSubstitution(u32 etat) {
   return nouvEtat;
 }
 
+/**
+ * Description : Applique le tableau de invPermutation sur une variable
+ *               de 32 bits.
+ * Entree : Une variable de 32 bits.
+ * Sortie : Une variable de 32 bits.
+ * */
 u32 dechiffrementPermutation(const u32 etat) {
   u32 nouvEtat = 0;
   u32 bitEtat, bitNouvEtat;
@@ -27,6 +39,12 @@ u32 dechiffrementPermutation(const u32 etat) {
   return nouvEtat;
 }
 
+/**
+ * Description : Dechiffre le message chiffre à l'aide des sous cles.
+ * Entree : Le message chiffre.
+ *          Le tableau de sous cles.
+ * Sortie : Le message claire.
+ * */
 u32 fctDeDeChiffrement(const u32 mChiffre, const u32 sousCle[nbrSousCle]) {
   u32 etat = mChiffre, mClair;
   i32 i = nbrSousCle - 1;

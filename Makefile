@@ -22,8 +22,8 @@ all: build $(EXEC)
 build:
 	./build.sh
 
-$(EXEC): Main.o Chiffrement.o Dechiffrement.o Attaque2Present24.o Trier.o MyInclude.o
-	$(CC) $(CFLAGS) target/Main.o target/Chiffrement.o target/Dechiffrement.o target/Attaque2Present24.o target/Trier.o target/MyInclude.o -o bin/$@
+$(EXEC): Main.o Chiffrement.o Dechiffrement.o Attaque2Present24.o Trier.o Cadencement.o Test.o MyInclude.o
+	$(CC) $(CFLAGS) target/Main.o target/Chiffrement.o target/Dechiffrement.o target/Attaque2Present24.o target/Trier.o target/Cadencement.o target/Test.o target/MyInclude.o -o bin/$@
 
 run: 
 	./bin/crypto
@@ -45,6 +45,12 @@ Attaque2Present24.o: src/lib/Attaque2Present24.c src/lib/Attaque2Present24.h
 	$(CC) -c $(CFLAGS) $< -o target/$@
 
 Trier.o: src/lib/Trier.c src/lib/Trier.h
+	$(CC) -c $(CFLAGS) $< -o target/$@
+
+Test.o: src/lib/Test.c src/lib/Test.h
+	$(CC) -c $(CFLAGS) $< -o target/$@
+
+Cadencement.o: src/lib/Cadencement.c src/lib/Cadencement.h
 	$(CC) -c $(CFLAGS) $< -o target/$@
 
 MyInclude.o: src/lib/MyInclude.c src/lib/MyInclude.h
