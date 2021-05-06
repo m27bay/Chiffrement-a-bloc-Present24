@@ -1,31 +1,52 @@
 #include "../lib/Test.h"
 
-int main(void) {
-  // testChiffrementDechiffrement();
+void parseChoix(int argc, char *argv[]) {
+  if(argc == 4) {
+    if(strcmp(argv[1], "-c") == 0) {
+      u32 mClair = strtol(argv[2], NULL, 16);
+      u32 cleMaitre = strtol(argv[3], NULL, 16);
 
-  // Moi : OK
-  // (m1,c1) = (0x91c472,0x60ab71) (m2,c2) = (0xf18a50,0x68b9d2)
-  // (k1,k2) = (0x24d0c2,0x7c05bc)
-  testAttaque(0x91c472, 0x60ab71, 0xf18a50, 0x68b9d2);
+      u32 sousCLe[11];
+      cadencementDeCle(sousCLe, cleMaitre);
 
-  // gab : OK
-  // (m1,c1) = (0xb404cc,0x23714f) (m2,c2) = (0x576dcf,0x45051b)
-  // (k1,k2) = (0x009dbe,0x6c198b)
-  // (k1,k2) = (0x57f0b5,0x28baf5)
-  // (k1,k2) = (0x37048e,0x4af525)
-  testAttaque(0xb404cc, 0x23714f, 0x576dcf, 0x45051b);
+      printf("PRESENT24_\033[1;32m%06x\033[0m_(%06x) = %06x.\n", cleMaitre, mClair, fctDeChiffrement(mClair, sousCLe));
+    }
+    else if(strcmp(argv[1], "-d") == 0) {
+      u32 mChiffre = strtol(argv[2], NULL, 16);
+      u32 cleMaitre = strtol(argv[3], NULL, 16);
 
-  // theo : OK
-  // (m1,c1) = (0xce157a,0x0ed3f0) (m2,c2) = (0x4181c8,0x650e1e)
-  // (k1,k2) = (0x6deda7,0xe7141f)
-  testAttaque(0xce157a, 0x0ed3f0, 0x4181c8, 0x650e1e);
+      u32 sousCLe[11];
+      cadencementDeCle(sousCLe, cleMaitre);
 
-  // quentin : Ok
-  // (m1,c1) = (0x10dc72,0xd1d556) (m2,c2) = (0x8f60f1,0x8d3b0b)
-  // (k1,k2) = (0x20507a,0x3d4773)
-  // (k1,k2) = (0x61dd5a,0xdf6dc6)
-  // (k1,k2) = (0x104fff,0x6ee8ea)
-  testAttaque(0x10dc72, 0xd1d556, 0x8f60f1, 0x8d3b0b);
+      printf("%06x = PRESENT24_\033[1;31m%06x\033[0m_(%06x).\n", mChiffre, cleMaitre, fctDeDeChiffrement(mChiffre, sousCLe));
+    }
+    else {
+      printf("Option inconnue.\n");
+    }
+  }
+  else if(argc == 6) {
+    if(strcmp(argv[1], "-a") == 0) {
+      printf("\t\033[1;34m>> Debut attaque <<\033[0m\n");
+      attaque2Present24(strtol(argv[2], NULL, 16), strtol(argv[3], NULL, 16), strtol(argv[4], NULL, 16), strtol(argv[5], NULL, 16));
+      printf("\t\033[1;34m>> fin attaque <<\033[0m\n");
+    }
+    else {
+      printf("Option inconnue.\n");
+    }
+  }
+  else {
+    printf("Utilisation : \n");
+    printf("-c message cleMaitre : Pour chiffer\n");
+    printf("-d message cleMaitre : Pour dechiffer\n");
+    printf("-a m1 c1 m2 c2 : Pour attaquer\n");
+    return;
+  }
+}
+
+int main(int argc, char *argv[]) {
+  printf("\n");
+  parseChoix(argc, argv);
+  printf("\n");
   
   return 0;
 }

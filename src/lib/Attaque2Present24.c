@@ -37,7 +37,7 @@ void trouverClesCandidates(u32 cle, u32 cle2, u32 mClair2, u32 mChiffre2) {
   cadencementDeCle(sousCle2, cle2);
   u32 tmp = fctDeChiffrement(mClair2, sousCle);
   if(mChiffre2 == fctDeChiffrement(tmp, sousCle2)) {
-    printf("Cle : %06x, cle2 : %06x\n", cle, cle2);
+    printf("%06x = PRESENT24_\033[1;31m%06x\033[0m_( PRESENT24_\033[1;32m%06x\033[0m_(%06x) )\n", mClair2, cle2, cle, mChiffre2);
   }
 }
 
@@ -63,18 +63,50 @@ void trouverCollisions(msgCle_t* listeClair, msgCle_t* listeChiffre,
  * Entree : Deux couples clair-chiffre.
  * */
 void attaque2Present24(u32 mClair, u32 mChiffre, u32 mClair2, u32 mChiffre2) {
+  clock_t t, global;
+  float tempsExeSec;
+
+  global = clock();
+
   msgCle_t* listeClair = malloc(tailleCle * sizeof(msgCle_t));
   if(!listeClair) { printf("ERREUR : pointeur nul\n"); return; }
   msgCle_t* listeChiffre = malloc(tailleCle * sizeof(msgCle_t));
   if(!listeChiffre) { printf("ERREUR : pointeur nul\n"); return; }
 
+  t = clock();
   remplirListe(listeClair, tailleCle, mClair, 1);
-  trieCroissant(listeClair, tailleCle);
-  remplirListe(listeChiffre, tailleCle, mChiffre, 0);
-  trieCroissant(listeChiffre, tailleCle);
+  t = clock() - t;
+  tempsExeSec = ((float) t) / CLOCKS_PER_SEC;
+  printf(" Remplissage liste clair  : \033[1;34m%.2f sec\033[0m.\n", tempsExeSec);
 
+  t = clock();
+  trieCroissant(listeClair, tailleCle);
+  t = clock() - t;
+  tempsExeSec = ((float) t) / CLOCKS_PER_SEC;
+  printf("     Trie liste clair     : \033[1;34m%.2f sec\033[0m.\n", tempsExeSec);
+
+  t = clock();
+  remplirListe(listeChiffre, tailleCle, mChiffre, 0);
+  t = clock() - t;
+  tempsExeSec = ((float) t) / CLOCKS_PER_SEC;
+  printf("Remplissage liste chiffre : \033[1;34m%.2f sec\033[0m.\n", tempsExeSec);
+
+  t = clock();
+  trieCroissant(listeChiffre, tailleCle);
+  t = clock() - t;
+  tempsExeSec = ((float) t) / CLOCKS_PER_SEC;
+  printf("    Trie liste chiffre    : \033[1;34m%.2f sec\033[0m.\n\n", tempsExeSec);
+
+  t = clock();
   trouverCollisions(listeClair, listeChiffre, tailleCle, mClair2, mChiffre2);
+  t = clock() - t;
+  tempsExeSec = ((float) t) / CLOCKS_PER_SEC;
+  printf("\n   Collision et cle canditate    : \033[1;34m%.2f sec\033[0m.\n", tempsExeSec);
  
   free(listeClair);
   free(listeChiffre);
+
+  global = clock() - global;
+  tempsExeSec = ((float) global) / CLOCKS_PER_SEC;
+  printf("Temps d'execution pour l'attaque : \033[1;34m%.2f sec\033[0m.\n", tempsExeSec);
 }

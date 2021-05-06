@@ -25,9 +25,6 @@ build:
 $(EXEC): Main.o Chiffrement.o Dechiffrement.o Attaque2Present24.o Trier.o Cadencement.o Test.o MyInclude.o
 	$(CC) $(CFLAGS) target/Main.o target/Chiffrement.o target/Dechiffrement.o target/Attaque2Present24.o target/Trier.o target/Cadencement.o target/Test.o target/MyInclude.o -o bin/$@
 
-run: 
-	./bin/crypto
-
 #################################
 ########## COMPILE FILE #########
 #################################

@@ -162,16 +162,30 @@ void testChiffrementDechiffrement() {
 }
 
 /**
- * Description : Appel de la fonction attaque2Present24
- *               et calcul du temps d'execution;
- * Entree : Deux couples clair-chiffre.
+ * Description : Applique l'attaque sur plusieurs couples clair-chiffre.
  * */
-void testAttaque(u32 mClair, u32 mChiffre, u32 mClair2, u32 mChiffre2) {
-  clock_t t = clock();
+void testAttaque() {
+  // Mickael Le Denmat : OK
+  // (m1,c1) = (0x91c472,0x60ab71) (m2,c2) = (0xf18a50,0x68b9d2)
+  // (k1,k2) = (0x24d0c2,0x7c05bc)
+  attaque2Present24(0x91c472, 0x60ab71, 0xf18a50, 0x68b9d2);
 
-  attaque2Present24(mClair, mChiffre, mClair2, mChiffre2);
+  // Gabriel Dos Santos : OK
+  // (m1,c1) = (0xb404cc,0x23714f) (m2,c2) = (0x576dcf,0x45051b)
+  // (k1,k2) = (0x009dbe,0x6c198b)
+  // (k1,k2) = (0x57f0b5,0x28baf5)
+  // (k1,k2) = (0x37048e,0x4af525)
+  attaque2Present24(0xb404cc, 0x23714f, 0x576dcf, 0x45051b);
 
-  t = clock() - t;
-  float tempsExeSec = ((float) t) / CLOCKS_PER_SEC;
-  printf("temps d'execution : %f sec.\n", tempsExeSec);
+  // Theophile Molinatti : OK
+  // (m1,c1) = (0xce157a,0x0ed3f0) (m2,c2) = (0x4181c8,0x650e1e)
+  // (k1,k2) = (0x6deda7,0xe7141f)
+  attaque2Present24(0xce157a, 0x0ed3f0, 0x4181c8, 0x650e1e);
+
+  // Quentin Gruchet : Ok
+  // (m1,c1) = (0x10dc72,0xd1d556) (m2,c2) = (0x8f60f1,0x8d3b0b)
+  // (k1,k2) = (0x20507a,0x3d4773)
+  // (k1,k2) = (0x61dd5a,0xdf6dc6)
+  // (k1,k2) = (0x104fff,0x6ee8ea)
+  attaque2Present24(0x10dc72, 0xd1d556, 0x8f60f1, 0x8d3b0b);
 }

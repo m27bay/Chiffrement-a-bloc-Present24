@@ -2,16 +2,17 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <pthread.h>
-#include <unistd.h>
 #include <time.h>
+#include <unistd.h>
+#include <string.h>
+// #include <pthread.h>
 
 #define nbrSousCle 11      //< Le cadencement de cle donne 11 sous cles.
 #define tailleCle 16777216 //< = 2^24
 
 typedef unsigned char u8; //< Code sur 8 bits.
 typedef unsigned int u32; //< Code sur 32 bits.
-typedef int i32;					//< Code sur 32 bits.
+typedef int i32;					//< Code sur 31 bits, avec 1 bit signe.
 
 // Structure representant une variable sur 80 bits.
 typedef struct u80_s {
@@ -25,7 +26,7 @@ void copieU80DansU80(u80_t* copie, const u80_t original);
 
 // Structure associant un message et sa cle.
 typedef struct {
-	u32 message;
+	u32 message; //< chiffre ou clair
 	i32 cle;
 } msgCle_t;
 
