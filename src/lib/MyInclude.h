@@ -5,7 +5,6 @@
 #include <time.h>
 #include <unistd.h>
 #include <string.h>
-// #include <pthread.h>
 
 #define nbrSousCle 11      //< Le cadencement de cle donne 11 sous cles.
 #define tailleCle 16777216 //< = 2^24
@@ -29,12 +28,6 @@ typedef struct {
 	u32 message; //< chiffre ou clair
 	i32 cle;
 } msgCle_t;
-
-// Structure assciant deux cles entre elles.
-typedef struct {
-	i32 cle;
-	i32 cle2;
-} pairCle_t;
 
 // Tableau définie dans MyInclude.c, utilise dans d'autre fichiers.
 u8 tabSubstitution[16];

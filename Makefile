@@ -1,5 +1,5 @@
-DEBUG=yes
-#DEBUG=no
+# DEBUG=yes
+DEBUG=no
 CC=gcc
 EXEC=crypto
 
@@ -8,7 +8,7 @@ EXEC=crypto
 #################################
 
 ifeq ($(DEBUG), yes)
-	CFLAGS = -Wall -Wextra -g -pthread
+	CFLAGS = -Wall -Wextra -g
 else
 	CFLAGS = -Ofast
 endif
