@@ -5,35 +5,28 @@ De plus j'ai ajouté une structure `msgCLe_t` pour avoir l'association entre un 
 
 Enfin j'ai rempli à la main les tableaux inverses des tableaux de substitution et de permutation afin de ne pas les parcourir pour trouver la position de l'élément `x` cela rend le code plus rapide mais prend un peu plus de mémoire.
 
+voici le résultat :
+
+Tableau substitution inversé :
+S[x] = {5, 14, 15, 8, 12, 1, 2, 13, 11, 4, 6, 3, 0, 7, 9, 10}
+
+Tableau permutation inversé : 
+P[x] = {0, 4, 8, 12, 16, 20, 1, 5, 9, 13, 17, 21, 2, 6, 10, 14, 18, 22, 3, 7, 11, 15, 19, 23}
+
 # Attaque par le milieu
 
 Pour l'attaque par le milieu j'ai appliqué la méthode suivante : 
-- Remplissage de la liste clair avec toutes les clés possibles sur 2^24 bits, et triage par ordre croissant.
 
-- Remplissage de la liste chiffre avec toutes les clés possibles sur 2^24 bits, et triage par ordre croissant.
+Remplissage de la liste clair avec toutes les clés possibles sur 2^24 bits, et triage par ordre croissant. 
 
-- Recherche des collisions en appliquant l'algorithme `rechercheDichotomique` sur la liste clair pour chaque élément de la liste chiffré.
+Remplissage de la liste chiffre avec toutes les clés possibles sur 2^24 bits, et triage par ordre croissant. 
 
-- Dans cette recherche je regarde si j'ai trouvé une collision, si oui :
+Recherche des collisions en appliquant l'algorithme `rechercheDichotomique` sur la liste clair pour chaque élément de la liste chiffré.
 
-  - Je regarde dans la liste clair si ce message est dupliqué mais avec des clés différentes.
+Dans cette recherche je regarde si j'ai trouvé une collision, si oui :
 
-  - Je regarde au dessus et en dessous de ce dernier puisque la liste est triée.
-  
-  - Pour chaque messages similaires je test si les clé sont correctes. Afin d'y parvenir je chiffre un message, issue d'un autre couple de clair-chiffre, avec la clé de l'élément dans la liste clair, puis je chiffre ce résultat avec la clé issue de la liste chiffre. Enfin je vérifié que cela me donne le chiffre du couple clair-chiffré. Si tel est le cas je peux afficher le couples de clés.
+Je regarde dans la liste clair si ce message est dupliqué mais avec des clés différentes.
 
-```
-Tableau substitution : 
-|----------------------------------------------------------------------------|
-| S[x] | 5 | 14 | 15 | 8 | 12 | 1 | 2 | 13 | 11 | 4 | 6 | 3 | 0 | 7 | 9 | 10 |
-|----------------------------------------------------------------------------|
+Je regarde au dessus et en dessous de ce dernier puisque la liste est triée.
 
-Tableau permutation : 
-|-------------------------------------------------------------------------|
-| P[x] | 0 | 4 | 8 | 12 | 16 | 20 | 1 | 5 |	9 | 13 | 17 | 21 | 2 | 6 | 10 | 
-|-------------------------------------------------------------------------|
-
-|------------------------------------------|
-| 14 | 18 | 22 | 3 | 7 | 11 | 15 | 19 | 23 |
-|------------------------------------------|
-```
+Pour chaque messages similaires je test si les clé sont correctes. Afin d'y parvenir je chiffre un message, issue d'un autre couple de clair-chiffre, avec la clé de l'élément dans la liste clair, puis je chiffre ce résultat avec la clé issue de la liste chiffre. Enfin je vérifié que cela me donne le chiffre du couple clair-chiffré. Si tel est le cas je peux afficher le couples de clés.
