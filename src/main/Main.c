@@ -160,25 +160,19 @@ void testAttaque(u32 mClair, u32 mChiffre, u32 mClair2, u32 mChiffre2) {
   if(!listeClair) { printf("ERREUR : pointeur nul\n"); return; }
   msgCle_t* listeChiffre = malloc(tailleCle * sizeof(msgCle_t));
   if(!listeChiffre) { printf("ERREUR : pointeur nul\n"); return; }
-  pairCle_t* collision = malloc(tailleCle * sizeof(pairCle_t));
-	if(!collision) { printf("ERREUR : pointeur nul\n"); return; }
-  initListePairCle(collision, tailleCle);
+  // pairCle_t* collision = malloc(tailleCle * sizeof(pairCle_t));
+	// if(!collision) { printf("ERREUR : pointeur nul\n"); return; }
+  // initListePairCle(collision, tailleCle);
 
   remplirListe(listeClair, tailleCle, mClair, 1);
   trieCroissant(listeClair, tailleCle);
   remplirListe(listeChiffre, tailleCle, mChiffre, 0);
-  u32 msg = listeChiffre[0x28baf5].message;
-  printf("message : %06x\n", msg);
   trieCroissant(listeChiffre, tailleCle);
 
-  printf("%d\n", rechercheDichotomique(listeClair, msg, 0, tailleCle));
-
-  trouverCollisions(collision, listeClair, listeChiffre, tailleCle);
-  trouverClesCandidates(collision, tailleCle, mClair2, mChiffre2);
+  trouverCollisions(listeClair, listeChiffre, tailleCle, mClair2, mChiffre2);
  
   free(listeClair);
   free(listeChiffre);
-  free(collision);
 
   t = clock() - t;
   printf("temps d'execution : %f sec\n", ((float)t)/CLOCKS_PER_SEC);
@@ -190,26 +184,26 @@ int main(void) {
   // Moi : OK
   // (m1,c1) = (0x91c472,0x60ab71) (m2,c2) = (0xf18a50,0x68b9d2)
   // (k1,k2) = (0x24d0c2,0x7c05bc)
-  // testAttaque(0x91c472, 0x60ab71, 0xf18a50, 0x68b9d2);
+  testAttaque(0x91c472, 0x60ab71, 0xf18a50, 0x68b9d2);
 
-  // gab : 
+  // gab : OK
   // (m1,c1) = (0xb404cc,0x23714f) (m2,c2) = (0x576dcf,0x45051b)
   // (k1,k2) = (0x009dbe,0x6c198b)
   // (k1,k2) = (0x57f0b5,0x28baf5)
   // (k1,k2) = (0x37048e,0x4af525)
   testAttaque(0xb404cc, 0x23714f, 0x576dcf, 0x45051b);
 
-  // theo : 
+  // theo : OK
   // (m1,c1) = (0xce157a,0x0ed3f0) (m2,c2) = (0x4181c8,0x650e1e)
   // (k1,k2) = (0x6deda7,0xe7141f)
-  // testAttaque(0xce157a, 0x0ed3f0, 0x4181c8, 0x650e1e);
+  testAttaque(0xce157a, 0x0ed3f0, 0x4181c8, 0x650e1e);
 
-  // quentin : 
+  // quentin : Ok
   // (m1,c1) = (0x10dc72,0xd1d556) (m2,c2) = (0x8f60f1,0x8d3b0b)
   // (k1,k2) = (0x20507a,0x3d4773)
   // (k1,k2) = (0x61dd5a,0xdf6dc6)
   // (k1,k2) = (0x104fff,0x6ee8ea)
-  // testAttaque(0x10dc72, 0xd1d556, 0x8f60f1, 0x8d3b0b);
-
+  testAttaque(0x10dc72, 0xd1d556, 0x8f60f1, 0x8d3b0b);
+  
   return 0;
 }

@@ -32,17 +32,30 @@ void trieCroissant(msgCle_t* liste, u32 tailleListe) {
   quickSort(liste, 0, tailleListe - 1);
 }
 
-i32 rechercheDichotomique(msgCle_t* liste, u32 message, i32 deb, i32 fin) {
+void rechercheDichotomique(msgCle_t* liste, msgCle_t msgCle, i32 deb, i32 fin,
+                          u32 mClair2, u32 mChiffre2) {
   i32 milieu = 0;
-  if(fin < deb) { return -1; }
+  i32 milieu2 = 0;
+  if(fin < deb) { return; }
   else {
     milieu = ( (deb + fin) / 2 );
-    if(message == liste[milieu].message) { return liste[milieu].cle; }
-    else { 
-      if(message < liste[milieu].message) {
-        return rechercheDichotomique(liste, message, deb, milieu - 1);
+    if(msgCle.message == liste[milieu].message) {
+      milieu2 = milieu;
+      while(msgCle.message == liste[milieu2].message) {
+        trouverClesCandidates(liste[milieu2].cle, msgCle.cle, mClair2, mChiffre2);
+        milieu2--;
       }
-      return rechercheDichotomique(liste, message, milieu + 1, fin);
+      milieu2 = milieu+1;
+      while(msgCle.message == liste[milieu2].message) {
+        trouverClesCandidates(liste[milieu2].cle, msgCle.cle, mClair2, mChiffre2);
+        milieu2++;
+      }
+    }
+    else { 
+      if(msgCle.message < liste[milieu].message) {
+        return rechercheDichotomique(liste, msgCle, deb, milieu - 1, mClair2, mChiffre2);
+      }
+      return rechercheDichotomique(liste, msgCle, milieu + 1, fin, mClair2, mChiffre2);
     }
   }
 }
