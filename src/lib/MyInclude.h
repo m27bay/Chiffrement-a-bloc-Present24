@@ -26,7 +26,7 @@ void copieU80DansU80(u80_t* copie, const u80_t original);
 // Structure associant un message et sa cle.
 typedef struct {
 	u32 message; //< chiffre ou clair
-	i32 cle;
+	u32 cle;
 } msgCle_t;
 
 // Tableau définie dans MyInclude.c, utilise dans d'autre fichiers.

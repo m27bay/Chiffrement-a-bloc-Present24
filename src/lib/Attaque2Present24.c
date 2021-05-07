@@ -37,7 +37,7 @@ void trouverClesCandidates(u32 cle, u32 cle2, u32 mClair2, u32 mChiffre2) {
   cadencementDeCle(sousCle2, cle2);
   u32 tmp = fctDeChiffrement(mClair2, sousCle);
   if(mChiffre2 == fctDeChiffrement(tmp, sousCle2)) {
-    printf("%06x = PRESENT24_\033[1;31m%06x\033[0m_( PRESENT24_\033[1;32m%06x\033[0m_(%06x) )\n", mClair2, cle2, cle, mChiffre2);
+    printf("%06x = PRESENT24_\033[1;31m%06x\033[0m_( PRESENT24_\033[1;32m%06x\033[0m_(%06x) )\n", mChiffre2, cle2, cle, mClair2);
   }
 }
 
@@ -98,6 +98,7 @@ void attaque2Present24(u32 mClair, u32 mChiffre, u32 mClair2, u32 mChiffre2) {
   printf("    Trie liste chiffre    : \033[1;34m%.2f sec\033[0m.\n\n", tempsExeSec);
 
   t = clock();
+  printf("c = PRESENT24_\033[1;31mk2\033[0m_( PRESENT24_\033[1;32mk1\033[0m_( m ))\n");
   trouverCollisions(listeClair, listeChiffre, tailleCle, mClair2, mChiffre2);
   t = clock() - t;
   tempsExeSec = ((float) t) / CLOCKS_PER_SEC;
