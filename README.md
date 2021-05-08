@@ -18,6 +18,7 @@ Le nombre de tours de PRESENT24 est fixé à 10."
 - [Hiérarchie des dossiers](#Hiérarchie-des-dossiers)
 - [Lancement](#Lancement)
 - [Details](#Details)
+- [Information execution](#Information execution)
  
 # Hiérarchie des dossiers
 
@@ -89,3 +90,8 @@ Voici une liste détaillant le contenu des fichiers :
 * Le fichier `Attaque2Present24.c` contient les fonctions pour appliquer l'attaque par le milieu.
 * Le fichier `Trier.c` est utilisé par le précedent fichier pour avoir les algorithmes de `quick sort` et `rechercheDichotomique`.
 * Enfin le fichier `Test.c` est un fichier contenant des fonctions de tests.
+
+# Information execution
+
+L'execution de ce programme c'est faite sur une machine virtuel Linux Mint tournant sur un ordinateur portable sous Window 10 64bits avec un processeur Intel i7-8750H 2.20GHz et 16Go de RAM, dont 8 pour la machine virtuel.
+Sans autre application tournant en parallèle ce code s'execute en environ 35 secondes. La mémoire utilisée par le programme est inconnue.
