@@ -93,5 +93,5 @@ Voici une liste détaillant le contenu des fichiers :
 
 # Information execution
 
-L'execution de ce programme c'est faite sur une machine virtuel Linux Mint tournant sur un ordinateur portable sous Window 10 64bits avec un processeur Intel i7-8750H 2.20GHz et 16Go de RAM, dont 8 pour la machine virtuel.
+L'execution de ce programme est faite sur une machine virtuel Linux Mint tournant sur un ordinateur portable sous Window 10 64bits avec un processeur Intel i7-8750H 2.20GHz et 16Go de RAM, dont 8 pour la machine virtuel.
 Sans autre application tournant en parallèle ce code s'execute en environ 35 secondes. La mémoire utilisée par le programme est inconnue.
